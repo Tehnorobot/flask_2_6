@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<g><img src="static/img/mars_img.png"></g>
+<h1>{{ title }}</h1>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    {% for i in range(len_list - 1) %}
+    <li data-target="#carouselExampleIndicators" data-slide-to="{{ i + 1 }}"></li>
+    {% endfor %}
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="static/img/{{ images_list[0] }}" alt="{{ images_list[0] }}">
+    </div>
+    {% for i in images_list[1::] %}
+    <div class="carousel-item">
+      <img class="d-block w-100" src="static/img/{{ i }}" alt="{{ i }}">
+    </div>
+    {% endfor %}
+  </div>
+  <a href="#carouselExampleIndicators" class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a href="#carouselExampleIndicators" class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
+ {{ form.hidden_tag() }}
+ {{ form.photo }}
+ {% for error in form.photo.errors %}
+         <span style="color: red;">{{ error }}</span>
+ {% endfor %}
+ <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}
